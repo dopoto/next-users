@@ -24,6 +24,7 @@ export function useFetchUsers() {
                     "https://dummyjson.com/users"
                 );
                 setUsers(response.data.users);
+
                 setError(null);
             } catch (err) {
                 setError(

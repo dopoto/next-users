@@ -1,15 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useFetchUsers } from "@/hooks/useFetchUsers";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useUserContext } from "@/contexts/user-context";
 
 export default function UsersPage() {
     const [searchTerm, setSearchTerm] = useState("");
 
     const router = useRouter();
-    const { users, loading /*, error*/ } = useFetchUsers();
+
+    const { users, loading /*, error*/ } = useUserContext();
 
     const filteredUsers = users.filter(
         (user) =>

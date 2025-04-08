@@ -1,8 +1,11 @@
+import { useUserContext } from "@/contexts/user-context";
 import { User } from "@/domain/user";
 import { useState } from "react";
 
 export function useCreateUser() {
     const [isLoading, setIsLoading] = useState(false);
+
+    const { addUser } = useUserContext();
 
     const createUser = async (userData: User) => {
         setIsLoading(true);
@@ -21,7 +24,11 @@ export function useCreateUser() {
             }
 
             const data = await response.json();
+
+            addUser(data);
+
             setIsLoading(false);
+
             return data;
         } catch (error) {
             setIsLoading(false);
