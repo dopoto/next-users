@@ -64,7 +64,7 @@ export default function UsersPage() {
                         </thead>
                         <tbody>
                             {filteredUsers.map((user) => (
-                                <tr key={user.id} className="border-b">
+                                <tr key={user.email} className="border-b">
                                     <td className="p-4">{user.email}</td>
                                     <td className="p-4">{user.firstName}</td>
                                     <td className="p-4">{user.lastName}</td>

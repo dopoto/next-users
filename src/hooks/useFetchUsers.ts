@@ -1,14 +1,8 @@
 "use client";
 
+import { User } from "@/domain/user";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
-interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-}
 
 interface ApiResponse {
     users: User[];
