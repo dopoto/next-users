@@ -20,14 +20,24 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-    const { users: initialUsers, loading, error } = useFetchUsers();
+    const {
+        users: initialUsers,
+        loading: fetchLoading,
+        error: fetchError,
+    } = useFetchUsers();
+
     const [users, setUsers] = useState<User[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        if (initialUsers.length > 0) {
+        setLoading(fetchLoading);
+        setError(fetchError);
+
+        if (!fetchLoading && fetchError === null && initialUsers.length > 0) {
             setUsers(initialUsers);
         }
-    }, [initialUsers]);
+    }, [fetchLoading, fetchError, initialUsers]);
 
     const addUser = (user: User) => {
         setUsers((prevUsers) => [...prevUsers, user]);

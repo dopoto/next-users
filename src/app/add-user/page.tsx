@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -46,13 +46,15 @@ export default function AddUserPage() {
         }
     };
 
-    const handleFormSubmit = handleSubmit(onSubmit, (errors) => {
+    const onInvalid = (errors: FieldErrors<User>) => {
         const errorMessages = Object.entries(errors)
             .map(([, error]) => error.message)
             .filter((message): message is string => message !== undefined);
         setValidationErrors(errorMessages);
         setIsAlertOpen(true);
-    });
+    };
+
+    const handleFormSubmit = handleSubmit(onSubmit, onInvalid);
 
     return (
         <div className="container max-w-md py-10">

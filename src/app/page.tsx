@@ -10,7 +10,7 @@ export default function UsersPage() {
 
     const router = useRouter();
 
-    const { users, loading /*, error*/ } = useUserContext();
+    const { users, loading, error } = useUserContext();
 
     const filteredUsers = users.filter(
         (user) =>
@@ -27,14 +27,13 @@ export default function UsersPage() {
         );
     }
 
-    // Not in specs, but we can show an error message if the fetch fails
-    // if (error) {
-    //     return (
-    //         <div className="flex h-screen items-center justify-center">
-    //             <p className="text-2xl text-red-500">Could not load users</p>
-    //         </div>
-    //     );
-    // }
+    if (error) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <p className="text-2xl text-red-500">Could not load users</p>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto flex min-h-screen flex-col p-4">
