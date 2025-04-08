@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useFetchUsers } from "@/hooks/useFetchUsers";
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 export default function UsersPage() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -37,7 +38,7 @@ export default function UsersPage() {
     return (
         <div className="container mx-auto flex min-h-screen flex-col p-4">
             <header className="mb-6">
-                <input
+                <Input
                     type="text"
                     placeholder="Search User"
                     className="pl-8"
